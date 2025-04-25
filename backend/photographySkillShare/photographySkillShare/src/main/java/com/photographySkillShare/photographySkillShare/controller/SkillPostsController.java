@@ -15,7 +15,7 @@ import java.util.List;
 @CrossOrigin
 public class SkillPostsController {
 
-    private final SkillPostsServiceImpl skillPostsService;
+    private  SkillPostsServiceImpl skillPostsService;
 
     // Create SkillPost
     @PostMapping("/create")
