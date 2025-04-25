@@ -9,16 +9,16 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class FeedbackServiceImpl implements FeedbackService {
 
-    private  FeedbackRepository feedbackRepository;
-    private  ModelMapper mapper;
+    private final FeedbackRepository feedbackRepository;
+    private final ModelMapper mapper;
 
     // Create Feedback
     @Override
@@ -32,32 +32,29 @@ public class FeedbackServiceImpl implements FeedbackService {
     @Override
     public List<FeedbackDto> getAllFeedback() {
         List<Feedback> feedbackList = feedbackRepository.findAll();
-        if (feedbackList.isEmpty()) {
-            return new ArrayList<>();
-        } else {
-            return feedbackList.stream()
-                    .map(feedback -> mapper.map(feedback, FeedbackDto.class))
-                    .toList();
-        }
+        return feedbackList.stream()
+                .map(feedback -> mapper.map(feedback, FeedbackDto.class))
+                .collect(Collectors.toList());
     }
 
     // Get Feedback by ID
     @Override
     public FeedbackDto getFeedbackById(Long id) {
-        Optional<Feedback> feedback = feedbackRepository.findById(id);
-        if (feedback.isPresent()) {
-            return mapper.map(feedback.get(), FeedbackDto.class);
-        } else {
-            throw new NotFoundException("Feedback not found with ID: " + id);
-        }
+        Feedback feedback = feedbackRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Feedback not found with ID: " + id));
+        return mapper.map(feedback, FeedbackDto.class);
     }
 
     // Update Feedback
     @Override
     public FeedbackDto updateFeedback(Long id, FeedbackDto feedbackDto) {
-        Feedback feedback = mapper.map(feedbackDto, Feedback.class);
-        feedback.setId(id);
-        Feedback updatedFeedback = feedbackRepository.save(feedback);
+        Feedback existingFeedback = feedbackRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Feedback not found with ID: " + id));
+
+
+        // Set other fields if applicable...
+
+        Feedback updatedFeedback = feedbackRepository.save(existingFeedback);
         return mapper.map(updatedFeedback, FeedbackDto.class);
     }
 

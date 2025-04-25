@@ -3,19 +3,22 @@ package com.photographySkillShare.photographySkillShare.controller;
 import com.photographySkillShare.photographySkillShare.dto.FeedbackDto;
 import com.photographySkillShare.photographySkillShare.service.Impl.FeedbackServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("api/feedback")
-@RequiredArgsConstructor
 @CrossOrigin
 public class FeedbackController {
 
-    private  FeedbackServiceImpl feedbackService;
+
+    private final FeedbackServiceImpl feedbackService;
+
 
     // Create Feedback
     @PostMapping("/create")

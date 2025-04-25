@@ -17,8 +17,10 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class SkillPostsServiceImpl implements SkillPostsService {
 
-    private  SkillPostsRepository skillPostsRepository;
-    private  ModelMapper mapper;
+    private final SkillPostsRepository skillPostsRepository;
+    private  final ModelMapper mapper;
+
+
 
     // Create SkillPost
     @Override
