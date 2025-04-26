@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="4e6a144d-c82f-4744-9088-90a7b3ba347b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/backend/photographySkillShare/photographySkillShare/src/main/java/com/photographySkillShare/photographySkillShare/controller/LearningPlansController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/photographySkillShare/photographySkillShare/src/main/java/com/photographySkillShare/photographySkillShare/service/Impl/LearningPlansServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/photographySkillShare/photographySkillShare/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/photographySkillShare/photographySkillShare/src/main/resources/application.properties" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="deshan" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/PramudithaB/Photography-Skill-Sharing-Learning-Platform.git",
+    "accountId": "38b09229-461a-499e-9f73-9ef2763aafc3"
+  }
+}]]></component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "Spring Boot.PhotographySkillShareApplication.executor": "Run",
+    "git-widget-placeholder": "pramuditha",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="photographySkillShare" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="photographySkillShare" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
+    <configuration name="PhotographySkillShareApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="photographySkillShare" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.photographySkillShare.photographySkillShare.PhotographySkillShareApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="TaskManager">
+    <servers />
+  </component>
+</project>
