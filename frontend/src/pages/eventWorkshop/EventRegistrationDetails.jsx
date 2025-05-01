@@ -59,7 +59,7 @@ const EventRegistrationDetails = () => {
           <span className="value">{event.createdAt}</span>
         </div>
         
-        {event.updatedAt && (
+        {event.updatedAt && event.updatedAt !== event.createdAt && (
           <div className="details-row">
             <span className="label">Last Updated:</span>
             <span className="value">{event.updatedAt}</span>
