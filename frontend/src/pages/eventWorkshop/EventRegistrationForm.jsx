@@ -110,6 +110,7 @@ const EventRegistrationForm = () => {
             value={formData.eventName}
             onChange={handleChange}
             required
+            placeholder="Enter event name"
           />
         </div>
         
@@ -122,6 +123,7 @@ const EventRegistrationForm = () => {
             onChange={handleChange}
             rows="4"
             required
+            placeholder="Describe your event"
           ></textarea>
         </div>
         
@@ -134,6 +136,7 @@ const EventRegistrationForm = () => {
             value={formData.organizer}
             onChange={handleChange}
             required
+            placeholder="Event organizer name"
           />
         </div>
         
@@ -158,6 +161,7 @@ const EventRegistrationForm = () => {
             value={formData.location}
             onChange={handleChange}
             required
+            placeholder="Event location"
           />
         </div>
         
