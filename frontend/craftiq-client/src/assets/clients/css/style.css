@@ -79,14 +79,14 @@
 
 .boxed-btn {
     background: #fff;
-    color: #ff2143 !important;
+    color: #656dff !important;
     display: inline-block;
     padding: 18px 44px;
     font-family: "Barlow", sans-serif;
     font-size: 14px;
     font-weight: 400;
     border: 0;
-    border: 1px solid #ff2143;
+    border: 1px solid #656dff;
     letter-spacing: 3px;
     text-align: center;
     color: #ff2143;
@@ -95,9 +95,9 @@
 }
 
 .boxed-btn:hover {
-    background: #ff2143;
+    background: #42d4f9;
     color: #fff !important;
-    border: 1px solid #ff2143
+    border: 1px solid #656dff
 }
 
 .boxed-btn:focus {
@@ -472,7 +472,7 @@ hr {
 }
 
 .button.button-contactForm.boxed-btn2 {
-    background: #ff2143;
+    background: #656dff;
     border: 1px solid #ddd;
     color: #fff !important;
     width: 100%
@@ -627,7 +627,7 @@ hr {
     color: #888
 }
 
-#scrollUp {
+/* #scrollUp {
     background: #ff2143;
     height: 50px;
     width: 50px;
@@ -639,7 +639,7 @@ hr {
     border-radius: 50%;
     line-height: 48px;
     border: 2px solid transparent
-}
+} */
 
 @media (max-width: 575px) {
     #scrollUp {
@@ -2896,7 +2896,7 @@ hr {
 
 .header-area .header-bottom {
     box-shadow: 0px 0px 36px 0px rgba(0, 0, 0, 0.1);
-    background: #ff2143
+    background: #00d0ff
 }
 
 @media only screen and (min-width: 576px) and (max-width: 767px) {
@@ -2927,7 +2927,7 @@ hr {
     content: "";
     width: 1px;
     height: 101%;
-    background: #ff889a;
+    background: #fff;
     position: absolute;
     left: 0;
     top: 0px;
@@ -2938,7 +2938,7 @@ hr {
     content: "";
     width: 1px;
     height: 101%;
-    background: #ff889a;
+    background: #fff;
     position: absolute;
     right: 0;
     top: 0px;

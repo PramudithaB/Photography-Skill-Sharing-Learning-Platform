@@ -29,7 +29,7 @@ function CommentCreate() {
                     </div>
                   </div>
                   <div className="form-group">
-                    <button type="submit" className="button button-contactForm btn_1 boxed-btn">Send Message</button>
+                    <button type="submit" className="button button-contactForm btn_1 boxed-btn">Send Comment</button>
                   </div>
                 </form>
               </div>
