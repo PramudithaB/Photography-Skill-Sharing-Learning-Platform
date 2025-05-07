@@ -15,6 +15,7 @@ import SkillPostView from '../views/SkillPostView';
 import UserEdit from '../views/UserEdit';
 import UserProfile from '../views/UserProfile';
 import ViewSkillPost from '../views/ViewSkillPost';
+import LearningView from '../views/LearningView';
 
 const UserRoutes = [
   {
@@ -109,6 +110,13 @@ const UserRoutes = [
     hidden: false,
   },
   {
+    path: "/learning-view",
+    name: "Learning View",
+    component: LearningView,
+    layout: "/user",
+    hidden: false,
+  },
+  {
     path: "/feedback-managment",
     name: "feedback managment",
     component: FeeadbackManagment, 
@@ -129,8 +137,6 @@ const UserRoutes = [
     layout: "/user",
     hidden: false,
   }
-
-
 ];
 
 export default UserRoutes;
