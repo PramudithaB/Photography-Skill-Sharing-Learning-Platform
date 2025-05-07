@@ -61,17 +61,11 @@ function Header() {
                       <nav>
                         <ul id="navigation">
                           <li><Link to="/user/home">Home</Link></li> {/* Use Link for navigation */}
-                          <li><Link to="/user/about">About</Link></li> {/* Use Link for navigation */}
+                          <li><Link to="/user/about">Learning Plans</Link></li> {/* Use Link for navigation */}
                           <li><Link to="/user/skill-post-view">Category</Link></li>
                           <li><Link to="/user/blog-details">Latest News</Link></li>
-                          <li><Link to="#">Pages</Link>
-                            <ul className="submenu">
-                              <li><Link to="/user/blog">Blog</Link></li>
-                              <li><Link to="/user/blog-details">Blog Details</Link></li>
-                              <li><Link to="/user/elements">Element</Link></li>
-                            </ul>
-                          </li>
-                          <li><Link to="/contact.html">Contact</Link></li>
+                          <li><Link to="/user/learning-view">Learning View</Link></li>
+                 
                         </ul>
                       </nav>
                     </div>
