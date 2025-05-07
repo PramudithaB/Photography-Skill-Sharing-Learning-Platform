@@ -9,9 +9,9 @@ const CommentData = [
       img: img1,
       userId: 1,
       pargrhap: "Multiply sea night grass fourth day sea lesser rule open subdue female fill which them Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser",
-      author: "Emilly Blunt",
-      date: "December 4, 2017 at 3:12 pm",
-       postTitle: "Second divided from form fish beast made every of seas all gathered us saying he our"
+      author: "Shehan",
+      date: "May 5, 2025 at 3:12 pm",
+      //  postTitle: "Second divided from form fish beast made every of seas all gathered us saying he our"
     },
     {
       id: 2,
