@@ -4,7 +4,7 @@ function CommentCreate() {
   return (
     <div>
         <div className="comment-form">
-                <h4>Leave a Reply</h4>
+                <h4 >Write Comment</h4>
                 <form className="form-contact comment_form" action="#" id="commentForm">
                   <div className="row">
                     <div className="col-12">
