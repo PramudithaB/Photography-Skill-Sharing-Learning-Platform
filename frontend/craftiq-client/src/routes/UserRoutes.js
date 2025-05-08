@@ -132,7 +132,7 @@ const UserRoutes = [
     component: SkillPostView, 
     layout: "/user",
     hidden: false,
-  },
+  }, 
   {
     path: "/event-workshop",
     name: "Event Workshop",

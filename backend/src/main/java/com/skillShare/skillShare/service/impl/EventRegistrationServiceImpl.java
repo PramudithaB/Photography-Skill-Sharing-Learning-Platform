@@ -72,6 +72,7 @@ public class EventRegistrationServiceImpl implements EventRegistrationService {
         return dto;
     }
 
+    
     // Update Event Registration
     @Override
     public EventRegistrationDto updateEventRegistration(String id, EventRegistrationDto eventRegistrationDto) {

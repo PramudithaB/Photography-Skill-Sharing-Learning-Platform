@@ -23,7 +23,7 @@ const eventService = {
     } catch (error) {
       console.error(`Error fetching event with ID ${id}:`, error);
       throw error;
-    }
+    }   
   },
 
   // Create a new event
