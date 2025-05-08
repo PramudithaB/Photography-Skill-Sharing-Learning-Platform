@@ -39,8 +39,8 @@ function CommentCreate() {
               <div className="form-group">
                 <input
                   className="form-control"
-                  name="name"
-                  id="name"
+                  name="author"
+                  id="author"
                   type="text"
                   placeholder="Name"
                 />
@@ -54,8 +54,8 @@ function CommentCreate() {
                   id="createdAt"
                   type="text"
                   placeholder="CreatedAt"
-                  // value={dateTime}
-                  // readOnly
+                  value={dateTime} // Set the current Sri Lankan time here
+                  readOnly // Make the input read-only
                 />
               </div>
             </div>
