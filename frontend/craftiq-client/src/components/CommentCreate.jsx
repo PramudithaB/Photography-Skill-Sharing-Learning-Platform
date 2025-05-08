@@ -25,7 +25,7 @@ function CommentCreate() {
             <div className="col-12">
               <div className="form-group">
                 <textarea
-                  className="form-control w-100"
+                  className="form-control  w-100"
                   name="comment"
                   id="comment"
                   cols={30}
