@@ -23,7 +23,7 @@ function EventWorkshopDetails() {
     };
     
     fetchEventDetails();
-  }, [id]);  
+  }, [id]);
   
   const handleDelete = async () => {
     if (window.confirm('Are you sure you want to delete this event?')) {

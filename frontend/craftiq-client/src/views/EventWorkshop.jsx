@@ -103,7 +103,7 @@ function EventWorkshop() {
                       View Details
                     </Button>
                     <Button 
-                      variant="warning"   
+                      variant="warning" 
                       size="sm"
                       as={Link}
                       to={`/user/event-workshop/edit/${event.id}`}

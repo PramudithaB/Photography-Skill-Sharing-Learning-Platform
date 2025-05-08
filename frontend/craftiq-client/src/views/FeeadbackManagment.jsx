@@ -27,7 +27,7 @@ function FeeadbackManagment() {
       <div className="container box_1170">
         <div className="section-top-border">
           <h3 className="mb-30">User Feedback</h3>
-          <div className="row">  
+          <div className="row">
             {userComments.map((comment) => (
               <div className="col-lg-12 mb-5" key={comment.id}>
                 <div className="d-flex align-items-center mb-4">

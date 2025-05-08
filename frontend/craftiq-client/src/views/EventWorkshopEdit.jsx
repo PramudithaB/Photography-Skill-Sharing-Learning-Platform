@@ -25,7 +25,7 @@ function EventWorkshopEdit() {
         const eventData = await eventService.getEventById(id);
         setFormData({
           eventName: eventData.eventName || '',
-          description: eventData.description || '',  
+          description: eventData.description || '',
           organizer: eventData.organizer || '',
           eventDate: eventData.eventDate || '',
           location: eventData.location || '',

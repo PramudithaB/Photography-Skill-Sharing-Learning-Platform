@@ -23,7 +23,7 @@ function EventWorkshopCreate() {
       ...prevState,
       [name]: value
     }));
-  };   
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
