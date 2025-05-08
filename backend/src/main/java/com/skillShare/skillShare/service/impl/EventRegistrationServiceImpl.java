@@ -24,34 +24,15 @@ public class EventRegistrationServiceImpl implements EventRegistrationService {
     public EventRegistrationDto createEventRegistration(EventRegistrationDto eventRegistrationDto) {
         EventRegistration eventRegistration = mapper.map(eventRegistrationDto, EventRegistration.class);
         EventRegistration savedEventRegistration = eventRegistrationRepository.save(eventRegistration);
-        
-        // Debug print to check if ID is generated
-        System.out.println("Generated ID: " + savedEventRegistration.getId());
-        
-        EventRegistrationDto resultDto = mapper.map(savedEventRegistration, EventRegistrationDto.class);
-        
-        // Explicitly set the ID to ensure it's included in the response
-        resultDto.setId(savedEventRegistration.getId());
-        
-        return resultDto;
+        return mapper.map(savedEventRegistration, EventRegistrationDto.class);
     }
 
     // Get all Event Registrations
     @Override
     public List<EventRegistrationDto> getAllEventRegistrations() {
         List<EventRegistration> eventRegistrationList = eventRegistrationRepository.findAll();
-        
-        // Debug print to check if entities have IDs
-        eventRegistrationList.forEach(registration -> 
-            System.out.println("Entity ID: " + registration.getId()));
-            
         return eventRegistrationList.stream()
-                .map(eventRegistration -> {
-                    EventRegistrationDto dto = mapper.map(eventRegistration, EventRegistrationDto.class);
-                    // Explicitly set the ID to ensure it's included in the response
-                    dto.setId(eventRegistration.getId());
-                    return dto;
-                })
+                .map(eventRegistration -> mapper.map(eventRegistration, EventRegistrationDto.class))
                 .collect(Collectors.toList());
     }
 
@@ -60,16 +41,7 @@ public class EventRegistrationServiceImpl implements EventRegistrationService {
     public EventRegistrationDto getEventRegistrationById(String id) {
         EventRegistration eventRegistration = eventRegistrationRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Event Registration not found with ID: " + id));
-        
-        // Debug print to check if entity has ID
-        System.out.println("Retrieved entity ID: " + eventRegistration.getId());
-        
-        EventRegistrationDto dto = mapper.map(eventRegistration, EventRegistrationDto.class);
-        
-        // Explicitly set the ID to ensure it's included in the response
-        dto.setId(eventRegistration.getId());
-        
-        return dto;
+        return mapper.map(eventRegistration, EventRegistrationDto.class);
     }
 
     // Update Event Registration
@@ -88,16 +60,7 @@ public class EventRegistrationServiceImpl implements EventRegistrationService {
         existingEventRegistration.setId(entityId);
 
         EventRegistration updatedEventRegistration = eventRegistrationRepository.save(existingEventRegistration);
-        
-        // Debug print to check if updated entity has ID
-        System.out.println("Updated entity ID: " + updatedEventRegistration.getId());
-        
-        EventRegistrationDto resultDto = mapper.map(updatedEventRegistration, EventRegistrationDto.class);
-        
-        // Explicitly set the ID to ensure it's included in the response
-        resultDto.setId(updatedEventRegistration.getId());
-        
-        return resultDto;
+        return mapper.map(updatedEventRegistration, EventRegistrationDto.class);
     }
 
     // Delete Event Registration

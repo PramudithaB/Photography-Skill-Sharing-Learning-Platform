@@ -15,10 +15,6 @@ import SkillPostView from '../views/SkillPostView';
 import UserEdit from '../views/UserEdit';
 import UserProfile from '../views/UserProfile';
 import ViewSkillPost from '../views/ViewSkillPost';
-import EventWorkshop from '../views/EventWorkshop';
-import EventWorkshopCreate from '../views/EventWorkshopCreate';
-import EventWorkshopDetails from '../views/EventWorkshopDetails';
-import EventWorkshopEdit from '../views/EventWorkshopEdit';
 
 const UserRoutes = [
   {
@@ -132,35 +128,9 @@ const UserRoutes = [
     component: SkillPostView, 
     layout: "/user",
     hidden: false,
-  },
-  {
-    path: "/event-workshop",
-    name: "Event Workshop",
-    component: EventWorkshop, 
-    layout: "/user",
-    hidden: false,
-  },
-  {
-    path: "/event-workshop/create",
-    name: "Create Event",
-    component: EventWorkshopCreate, 
-    layout: "/user",
-    hidden: true,
-  },
-  {
-    path: "/event-workshop/view/:id",
-    name: "Event Details",
-    component: EventWorkshopDetails, 
-    layout: "/user",
-    hidden: true,
-  },
-  {
-    path: "/event-workshop/edit/:id",
-    name: "Edit Event",
-    component: EventWorkshopEdit, 
-    layout: "/user",
-    hidden: true,
   }
+
+
 ];
 
 export default UserRoutes;
