@@ -15,10 +15,6 @@ import SkillPostView from '../views/SkillPostView';
 import UserEdit from '../views/UserEdit';
 import UserProfile from '../views/UserProfile';
 import ViewSkillPost from '../views/ViewSkillPost';
-import EventWorkshop from '../views/EventWorkshop';
-import EventWorkshopCreate from '../views/EventWorkshopCreate';
-import EventWorkshopDetails from '../views/EventWorkshopDetails';
-import EventWorkshopEdit from '../views/EventWorkshopEdit';
 
 const UserRoutes = [
   {
@@ -160,7 +156,10 @@ const UserRoutes = [
     component: EventWorkshopEdit, 
     layout: "/user",
     hidden: true,
+
   }
+
+
 ];
 
 export default UserRoutes;
