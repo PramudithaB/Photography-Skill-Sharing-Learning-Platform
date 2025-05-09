@@ -19,6 +19,7 @@ import EventWorkshop from '../views/EventWorkshop';
 import EventWorkshopCreate from '../views/EventWorkshopCreate';
 import EventWorkshopDetails from '../views/EventWorkshopDetails';
 import EventWorkshopEdit from '../views/EventWorkshopEdit';
+import EventWorkshopAll from '../views/EventWorkshopAll';
 
 const UserRoutes = [
   {
@@ -134,6 +135,13 @@ const UserRoutes = [
     hidden: false,
   },
   {
+    path: "/event-workshop-all",
+    name: "Events & Workshops",
+    component: EventWorkshopAll, 
+    layout: "/user",
+    hidden: false,
+  },
+  {
     path: "/event-workshop",
     name: "Event Workshop",
     component: EventWorkshop, 
@@ -161,6 +169,7 @@ const UserRoutes = [
     layout: "/user",
     hidden: true,
   }
+
 ];
 
 export default UserRoutes;
