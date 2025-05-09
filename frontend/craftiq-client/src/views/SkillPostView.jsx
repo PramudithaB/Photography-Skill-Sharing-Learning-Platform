@@ -8,7 +8,7 @@ function SkillPostView() {
   return (
     <div>
          <section className="blog_area section-padding">
-        <div className="container">
+        <div className=" container">
           <div className="row">
             <div className="col-lg-8 mb-5 mb-lg-0">
             {SkillPostData.slice(0, 8).map(skillpost => (
