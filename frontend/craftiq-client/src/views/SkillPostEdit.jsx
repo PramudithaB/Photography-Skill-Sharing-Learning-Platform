@@ -10,11 +10,11 @@ function SkillPostEdit() {
   const skillPost = SkillPostData.find(post => post.id === postId);
 
   if (!skillPost) {
-    return <div className="text-center mt-5">Post not found</div>;
+    return <div className="text-center mt-5">Post not found</div>; 
   }
   return (
     <div>
-        <section className="blog_area single-post-area section-padding">
+        <section className=" blog_area single-post-area section-padding">
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12 posts-list">
