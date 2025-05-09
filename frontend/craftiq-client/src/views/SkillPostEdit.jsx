@@ -20,7 +20,7 @@ function SkillPostEdit() {
                         <div className="col-lg-12 posts-list">
                         <UpdatePost skillPost={skillPost} />
                             <div className="d-flex justify-content-center">
-                                <Link to="/user/user-edit" className="btn btn-info mt-3">
+                                <Link to="/user/user-edit"  className="btn btn-info mt-3">
                                     Update
                                 </Link>
                             </div>
