@@ -74,49 +74,191 @@ function EventWorkshop() {
         <Row>
           {events.map(event => (
             <Col md={6} lg={4} className="mb-4" key={event.id}>
-              <Card className="h-100 shadow-sm">
-                <Card.Body>
-                  <Card.Title>{event.eventName}</Card.Title>
-                  <Card.Text as="div">
-                    <div className="mb-2">
-                      <strong>Organizer:</strong> {event.organizer}
+              <Card className="h-100" style={{
+                borderRadius: '12px',
+                border: 'none',
+                boxShadow: '0 6px 18px rgba(0,0,0,0.1)',
+                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                overflow: 'hidden'
+              }} 
+              onMouseOver={(e) => {
+                e.currentTarget.style.transform = 'translateY(-5px)';
+                e.currentTarget.style.boxShadow = '0 12px 24px rgba(0,0,0,0.15)';
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 6px 18px rgba(0,0,0,0.1)';
+              }}>
+                <Card.Body style={{ padding: '1.5rem' }}>
+                  <Card.Title style={{ 
+                    fontSize: '1.4rem', 
+                    fontWeight: '600',
+                    color: '#2c3e50',
+                    marginBottom: '1rem'
+                  }}>{event.eventName}</Card.Title>
+                  <Card.Text as="div" style={{ color: '#555' }}>
+                    <div style={{ 
+                      marginBottom: '0.75rem',
+                      display: 'flex',
+                      alignItems: 'center' 
+                    }}>
+                      <span style={{ 
+                        backgroundColor: '#e9f7fe', 
+                        padding: '4px 8px', 
+                        borderRadius: '4px',
+                        marginRight: '8px',
+                        color: '#3498db',
+                        fontWeight: '500',
+                        fontSize: '0.85rem'
+                      }}>Organizer</span>
+                      <span>{event.organizer}</span>
                     </div>
-                    <div className="mb-2">
-                      <strong>Date:</strong> {formatDate(event.eventDate)}
+                    <div style={{ 
+                      marginBottom: '0.75rem',
+                      display: 'flex',
+                      alignItems: 'center'
+                    }}>
+                      <span style={{ 
+                        backgroundColor: '#f0f8e6', 
+                        padding: '4px 8px', 
+                        borderRadius: '4px',
+                        marginRight: '8px',
+                        color: '#27ae60',
+                        fontWeight: '500',
+                        fontSize: '0.85rem'
+                      }}>Date</span>
+                      <span>{formatDate(event.eventDate)}</span>
                     </div>
-                    <div className="mb-2">
-                      <strong>Location:</strong> {event.location}
+                    <div style={{ 
+                      marginBottom: '0.75rem',
+                      display: 'flex',
+                      alignItems: 'center'
+                    }}>
+                      <span style={{ 
+                        backgroundColor: '#fef5e7', 
+                        padding: '4px 8px', 
+                        borderRadius: '4px',
+                        marginRight: '8px',
+                        color: '#e67e22',
+                        fontWeight: '500',
+                        fontSize: '0.85rem'
+                      }}>Location</span>
+                      <span>{event.location}</span>
                     </div>
-                    <div className="text-truncate mt-3">
+                    <div style={{ 
+                      marginTop: '1.25rem',
+                      padding: '12px',
+                      backgroundColor: '#f9f9f9',
+                      borderRadius: '8px',
+                      fontSize: '0.95rem',
+                      height: '80px',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      display: '-webkit-box',
+                      WebkitLineClamp: '3',
+                      WebkitBoxOrient: 'vertical'
+                    }}>
                       {event.description}
                     </div>
                   </Card.Text>
                 </Card.Body>
-                <Card.Footer className="bg-white">
-                  <div className="d-flex justify-content-between">
-                    <Button 
-                      variant="primary" 
-                      size="sm"
-                      as={Link}
-                      to={`/user/event-workshop/view/${event.id}`}
-                    >
-                      View Details
-                    </Button>
-                    <Button 
-                      variant="warning" 
-                      size="sm"
-                      as={Link}
-                      to={`/user/event-workshop/edit/${event.id}`}
-                    >
-                      Edit
-                    </Button>
-                    <Button 
-                      variant="danger" 
-                      size="sm"
-                      onClick={() => handleDelete(event.id)}
-                    >
-                      Delete
-                    </Button>
+                <Card.Footer style={{ 
+                  backgroundColor: 'white',
+                  borderTop: '1px solid rgba(0,0,0,0.05)',
+                  padding: '1.25rem 1.5rem'
+                }}>
+                  <div className="d-flex ">
+                    <div>
+                      <Button 
+                        variant="primary" 
+                        size="sm"
+                        as={Link}
+                        to={`/user/event-workshop/view/${event.id}`}
+                        style={{
+                          backgroundColor: '#3498db',
+                          borderColor: '#3498db',
+                          borderRadius: '6px',
+                          boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                          padding: '0.5rem 1rem',
+                          fontWeight: '500',
+                          transition: 'all 0.2s ease',
+                          marginRight: '10px',
+                          textBox: 'auto',
+                        }}
+                        onMouseOver={(e) => {
+                          e.currentTarget.style.backgroundColor = '#2980b9';
+                          e.currentTarget.style.borderColor = '#2980b9';
+                          e.currentTarget.style.boxShadow = '0 4px 8px rgba(0,0,0,0.15)';
+                        }}
+                        onMouseOut={(e) => {
+                          e.currentTarget.style.backgroundColor = '#3498db';
+                          e.currentTarget.style.borderColor = '#3498db';
+                          e.currentTarget.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
+                        }}
+                      >
+                        View Details
+                      </Button>
+                    </div>
+                    <div>
+                      <Button 
+                        variant="warning" 
+                        size="sm"
+                        as={Link}
+                        to={`/user/event-workshop/edit/${event.id}`}
+                        className="me-2"
+                        style={{
+                          backgroundColor: '#f1c40f',
+                          borderColor: '#f1c40f',
+                          borderRadius: '6px',
+                          boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                          padding: '0.5rem 1rem',
+                          fontWeight: '500',
+                          transition: 'all 0.2s ease',
+                          marginRight: '10px',
+                          textBox: 'auto',
+                        }}
+                        onMouseOver={(e) => {
+                          e.currentTarget.style.backgroundColor = '#f39c12';
+                          e.currentTarget.style.borderColor = '#f39c12';
+                          e.currentTarget.style.boxShadow = '0 4px 8px rgba(0,0,0,0.15)';
+                        }}
+                        onMouseOut={(e) => {
+                          e.currentTarget.style.backgroundColor = '#f1c40f';
+                          e.currentTarget.style.borderColor = '#f1c40f';
+                          e.currentTarget.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
+                        }}
+                      >
+                        Edit
+                      </Button>
+                      <Button 
+                        variant="danger" 
+                        size="sm"
+                        onClick={() => handleDelete(event.id)}
+                        style={{
+                          backgroundColor: '#e74c3c',
+                          borderColor: '#e74c3c',
+                          borderRadius: '6px',
+                          boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                          padding: '0.5rem 1rem',
+                          fontWeight: '500',
+                          transition: 'all 0.2s ease',
+                          marginRight: '10px',
+                          textBox: 'auto',
+                        }}
+                        onMouseOver={(e) => {
+                          e.currentTarget.style.backgroundColor = '#c0392b';
+                          e.currentTarget.style.borderColor = '#c0392b';
+                          e.currentTarget.style.boxShadow = '0 4px 8px rgba(0,0,0,0.15)';
+                        }}
+                        onMouseOut={(e) => {
+                          e.currentTarget.style.backgroundColor = '#e74c3c';
+                          e.currentTarget.style.borderColor = '#e74c3c';
+                          e.currentTarget.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
+                        }}
+                      >
+                        Delete
+                      </Button>
+                    </div>
                   </div>
                 </Card.Footer>
               </Card>
