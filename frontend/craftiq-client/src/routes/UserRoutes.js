@@ -141,7 +141,7 @@ const UserRoutes = [
     layout: "/user",
     hidden: false,
   },
-  {
+  { 
     path: "/event-workshop",
     name: "Event Workshop",
     component: EventWorkshop, 
