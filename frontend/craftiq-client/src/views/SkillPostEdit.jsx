@@ -15,7 +15,7 @@ function SkillPostEdit() {
   return (
     <div>
         <section className=" blog_area single-post-area section-padding">
-                <div className="container">
+                <div className=" container">
                     <div className="row">
                         <div className="col-lg-12 posts-list">
                         <UpdatePost skillPost={skillPost} />
