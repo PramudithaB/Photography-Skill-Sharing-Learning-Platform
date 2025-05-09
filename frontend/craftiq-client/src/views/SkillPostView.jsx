@@ -22,7 +22,7 @@ function SkillPostView() {
         </div>
       </section>
     </div>
-  )  
+  )    
 }
 
 export default SkillPostView
