@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Button, Container, Row, Col, Alert, Image } from 'react-bootstrap';
+import { Card, Button, Container, Row, Col, Alert, Image, Form, InputGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import eventService from '../services/eventService';
 
@@ -7,6 +7,7 @@ function EventWorkshopAll() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
   // Fetch events from the API
   useEffect(() => {
@@ -31,6 +32,19 @@ function EventWorkshopAll() {
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
+  // Filter events based on search query
+  const filteredEvents = events.filter(event => {
+    if (!searchQuery.trim()) return true;
+    
+    const query = searchQuery.toLowerCase();
+    return (
+      event.eventName?.toLowerCase().includes(query) ||
+      event.organizer?.toLowerCase().includes(query) ||
+      event.location?.toLowerCase().includes(query) ||
+      event.description?.toLowerCase().includes(query)
+    );
+  });
+
   if (loading) return (
     <Container className="py-5">
       <div className="text-center">Loading events...</div>
@@ -49,11 +63,41 @@ function EventWorkshopAll() {
         <h2>Event Workshops</h2>
       </div>
       
-      {events.length === 0 ? (
-        <Alert variant="info">No events currently available.</Alert>
+      {/* Search Bar */}
+      <div className="mb-4">
+        <InputGroup>
+          <Form.Control
+            placeholder="Search events by name, organizer, location..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            style={{
+              borderRadius: '8px 0 0 8px',
+              padding: '10px 15px',
+              boxShadow: '0 2px 4px rgba(0,0,0,0.05)'
+            }}
+          />
+          <Button 
+            variant="outline-primary"
+            style={{
+              borderRadius: '0 8px 8px 0',
+              padding: '0 15px',
+              boxShadow: '0 2px 4px rgba(0,0,0,0.05)'
+            }}
+          >
+            <i className="fa fa-search"></i> Search
+          </Button>
+        </InputGroup>
+      </div>
+      
+      {filteredEvents.length === 0 ? (
+        <Alert variant="info">
+          {searchQuery 
+            ? "No events match your search criteria. Try different keywords." 
+            : "No events currently available."}
+        </Alert>
       ) : (
         <Row>
-          {events.map(event => (
+          {filteredEvents.map(event => (
             <Col md={6} lg={4} className="mb-4" key={event.id}>
               <Card className="h-100 shadow-sm" style={{
                 borderRadius: '12px',
@@ -88,16 +132,7 @@ function EventWorkshopAll() {
                     </div>
                   </Card.Text>
                 </Card.Body>
-                <Card.Footer className="bg-white">
-                  {/* <Button 
-                    variant="outline-primary" 
-                    as={Link} 
-                    to={`/events/${event.id}`}
-                    className="w-100"
-                  >
-                    View Details
-                  </Button> */}
-                </Card.Footer>
+               
               </Card>
             </Col>
           ))}
