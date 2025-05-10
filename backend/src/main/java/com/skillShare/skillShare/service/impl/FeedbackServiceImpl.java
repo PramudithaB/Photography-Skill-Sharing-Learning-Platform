@@ -1,6 +1,8 @@
 package com.skillShare.skillShare.service.impl;
 
+import com.skillShare.skillShare.dto.EventRegistrationDto;
 import com.skillShare.skillShare.dto.FeedbackDto;
+import com.skillShare.skillShare.entity.EventRegistration;
 import com.skillShare.skillShare.entity.Feedback;
 import com.skillShare.skillShare.exception.NotFoundException;
 import com.skillShare.skillShare.repository.FeedbackRepository;
@@ -32,15 +34,38 @@ public class FeedbackServiceImpl implements FeedbackService {
     public FeedbackDto createFeedback(FeedbackDto feedbackDto) {
         Feedback feedback = mapper.map(feedbackDto, Feedback.class);
         Feedback savedFeedback = feedbackRepository.save(feedback);
-        return mapper.map(savedFeedback, FeedbackDto.class);
+        // return mapper.map(savedFeedback, FeedbackDto.class);
+
+         // Debug print to check if ID is generated
+        System.out.println("Generated ID: " + savedFeedback.getId());
+        
+        FeedbackDto resultDto = mapper.map(savedFeedback, FeedbackDto.class);
+        
+        // Explicitly set the ID to ensure it's included in the response
+        resultDto.setId(savedFeedback.getId());
+        
+        return resultDto;
     }
 
     // Get all Feedback
     @Override
     public List<FeedbackDto> getAllFeedback() {
         List<Feedback> feedbackList = feedbackRepository.findAll();
+        // return feedbackList.stream()
+        //         .map(feedback -> mapper.map(feedback, FeedbackDto.class))
+        //         .collect(Collectors.toList());
+
+        // Debug print to check if entities have IDs
+        feedbackList.forEach(registration -> 
+            System.out.println("Entity ID: " + registration.getId()));
+            
         return feedbackList.stream()
-                .map(feedback -> mapper.map(feedback, FeedbackDto.class))
+                .map(feedBack -> {
+                    FeedbackDto dto = mapper.map(feedBack, FeedbackDto.class);
+                    // Explicitly set the ID to ensure it's included in the response
+                    dto.setId(feedBack.getId());
+                    return dto;
+                })
                 .collect(Collectors.toList());
     }
 
@@ -49,7 +74,16 @@ public class FeedbackServiceImpl implements FeedbackService {
     public FeedbackDto getFeedbackById(String id) {
         Feedback feedback = feedbackRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Feedback not found with ID: " + id));
-        return mapper.map(feedback, FeedbackDto.class);
+        // return mapper.map(feedback, FeedbackDto.class);
+         // Debug print to check if entity has ID
+         System.out.println("Retrieved entity ID: " + feedback.getId());
+        
+         FeedbackDto dto = mapper.map(feedback, FeedbackDto.class);
+         
+         // Explicitly set the ID to ensure it's included in the response
+         dto.setId(feedback.getId());
+         
+         return dto;
     }
 
     // Update Feedback
@@ -58,14 +92,26 @@ public class FeedbackServiceImpl implements FeedbackService {
         Feedback existingFeedback = feedbackRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Feedback not found with ID: " + id));
 
-        // Map fields from DTO to entity
+        // Preserve the ID before mapping
+        String entityId = existingFeedback.getId();
+        
+        // Map DTO to entity
         mapper.map(feedbackDto, existingFeedback);
+        
+        // Explicitly set the ID back to ensure we update the same record
+        existingFeedback.setId(entityId);
 
-        // Ensure ID is not changed
-        existingFeedback.setId(id);
-
-        Feedback updatedFeedback = feedbackRepository.save(existingFeedback);
-        return mapper.map(updatedFeedback, FeedbackDto.class);
+        Feedback updateFeedback = feedbackRepository.save(existingFeedback);
+        
+        // Debug print to check if updated entity has ID
+        System.out.println("Updated entity ID: " + updateFeedback.getId());
+        
+        FeedbackDto resultDto = mapper.map(updateFeedback, FeedbackDto.class);
+        
+        // Explicitly set the ID to ensure it's included in the response
+        resultDto.setId(updateFeedback.getId());
+        
+        return resultDto;
     }
 
     // Delete Feedback
