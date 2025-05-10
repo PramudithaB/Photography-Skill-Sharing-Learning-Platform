@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Button, Container, Row, Col, Alert } from 'react-bootstrap';
+import { Card, Button, Container, Row, Col, Alert, Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import eventService from '../services/eventService';
 
@@ -89,6 +89,16 @@ function EventWorkshop() {
                 e.currentTarget.style.transform = 'translateY(0)';
                 e.currentTarget.style.boxShadow = '0 6px 18px rgba(0,0,0,0.1)';
               }}>
+                {event.photoUrl && (
+                  <div style={{ height: '180px', overflow: 'hidden' }}>
+                    <Image 
+                      src={`http://localhost:8080/uploads/${event.photoUrl}`}
+                      alt={event.eventName}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    />
+                  </div>
+                )}
+                
                 <Card.Body style={{ padding: '1.5rem' }}>
                   <Card.Title style={{ 
                     fontSize: '1.4rem', 
