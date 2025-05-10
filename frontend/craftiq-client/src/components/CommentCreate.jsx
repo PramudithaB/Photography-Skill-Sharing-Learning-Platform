@@ -1,93 +1,13 @@
-// import React, { useEffect, useState } from "react";
-
-// function CommentCreate() {
-  
-//   const [dateTime, setDateTime] = useState("");
-
-//   useEffect(() => {
-//     const sriLankaTime = new Date().toLocaleString("en-US", {
-//       timeZone: "Asia/Colombo",
-//       hour12: false,
-//     });
-
-//     // Format to "YYYY-MM-DD HH:mm:ss"
-//     const dateObj = new Date(sriLankaTime);
-//     const formattedDateTime = dateObj.toISOString().slice(0, 19).replace("T", " ");
-//     setDateTime(formattedDateTime);
-//   }, []);
-
-//   return (
-//     <div>
-//       <div className="comment-form">
-//         <h4>Write  Comment</h4>
-//         <form className="form-contact comment_form" action="#" id="commentForm">
-//           <div className="row">
-//             <div className="col-12">
-//               <div className="form-group">
-//                 <textarea
-//                   className="form-control  w-100"
-//                   name="comment"
-//                   id="comment"
-//                   cols={30}
-//                   rows={9}
-//                   placeholder="Write Comment"
-//                   defaultValue={""}
-//                 />
-//               </div>
-//             </div>
-//             <div className="col-sm-6">
-//               <div className="form-group">
-//                 <input
-//                   className="form-control"
-//                   name="author"
-//                   id="author"
-//                   type="text"
-//                   placeholder="Name"
-//                 />
-//               </div>
-//             </div>
-//             <div className="col-sm-6">
-//               <div className="form-group">
-//                 <input
-//                   className="form-control"
-//                   name="createdAt"
-//                   id="createdAt"
-//                   type="text"
-//                   placeholder="CreatedAt"
-//                   value={dateTime} // Set the current Sri Lankan time here
-//                   readOnly // Make the input read-only
-//                 />
-//               </div>
-//             </div>
-//             {/* <div className="col-12">
-//                       <div className="form-group">
-//                         <input className="form-control" name="website" id="website" type="text" placeholder="Website" />
-//                       </div>
-//                     </div> */}
-//           </div>
-//           <div className="form-group">
-//             <button
-//               type="submit"
-//               className="button button-contactForm btn_1 boxed-btn"
-//             >
-//               Send Comment
-//             </button>
-//           </div>
-//         </form>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default CommentCreate;
-
-
 import React, { useState, useEffect } from "react";
 
 const CommentCreate = () => {
   const [comment, setComment] = useState("");
   const [author, setAuthor] = useState("");
   const [createdAt, setCreatedAt] = useState("");
+  const [errors, setErrors] = useState({
+    comment: "",
+    author: ""
+  });
 
   // Set the current Sri Lankan time on mount
   useEffect(() => {
@@ -102,8 +22,65 @@ const CommentCreate = () => {
     setCreatedAt(getSLTime());
   }, []);
 
+  const validateForm = () => {
+    let tempErrors = {};
+    let isValid = true;
+
+    if (!comment.trim()) {
+      tempErrors.comment = "Comment cannot be empty";
+      isValid = false;
+    } else if (comment.length > 500) {
+      tempErrors.comment = "Comment cannot exceed 500 characters";
+      isValid = false;
+    } else {
+      tempErrors.comment = "";
+    }
+
+    if (!author.trim()) {
+      tempErrors.author = "Name cannot be empty";
+      isValid = false;
+    } else if (author.length > 50) {
+      tempErrors.author = "Name cannot exceed 50 characters";
+      isValid = false;
+    } else {
+      tempErrors.author = "";
+    }
+
+    setErrors(tempErrors);
+    return isValid;
+  };
+
+  const validateField = (name, value) => {
+    let errorMsg = "";
+
+    switch (name) {
+      case "comment":
+        if (!value.trim()) errorMsg = "Comment cannot be empty";
+        else if (value.length > 500) errorMsg = "Comment cannot exceed 500 characters";
+        break;
+      case "author":
+        if (!value.trim()) errorMsg = "Name cannot be empty";
+        else if (value.length > 50) errorMsg = "Name cannot exceed 50 characters";
+        break;
+      default:
+        break;
+    }
+
+    setErrors(prev => ({ ...prev, [name]: errorMsg }));
+  };
+
+  const handleBlur = (e) => {
+    const { name, value } = e.target;
+    validateField(name, value);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validate form before submission
+    if (!validateForm()) {
+      return;
+    }
 
     const feedbackData = {
       comment,
@@ -125,6 +102,7 @@ const CommentCreate = () => {
         alert("Comment submitted successfully!");
         setComment("");
         setAuthor("");
+        setErrors({ comment: "", author: "" });
         // Optionally update createdAt again
         const newDate = new Date().toLocaleString("sv-SE", {
           timeZone: "Asia/Colombo",
@@ -146,7 +124,7 @@ const CommentCreate = () => {
         <div className="col-12">
           <div className="form-group">
             <textarea
-              className="form-control w-100"
+              className={`form-control w-100 ${errors.comment ? 'is-invalid' : ''}`}
               name="comment"
               id="comment"
               cols={30}
@@ -154,20 +132,25 @@ const CommentCreate = () => {
               placeholder="Write Comment"
               value={comment}
               onChange={(e) => setComment(e.target.value)}
+              onBlur={handleBlur}
             />
+            {errors.comment && <div className="invalid-feedback">{errors.comment}</div>}
+            <small className="text-muted">{500 - comment.length} characters remaining</small>
           </div>
         </div>
         <div className="col-sm-6">
           <div className="form-group">
             <input
-              className="form-control"
+              className={`form-control ${errors.author ? 'is-invalid' : ''}`}
               name="author"
               id="author"
               type="text"
               placeholder="Name"
               value={author}
               onChange={(e) => setAuthor(e.target.value)}
+              onBlur={handleBlur}
             />
+            {errors.author && <div className="invalid-feedback">{errors.author}</div>}
           </div>
         </div>
         <div className="col-sm-6">
