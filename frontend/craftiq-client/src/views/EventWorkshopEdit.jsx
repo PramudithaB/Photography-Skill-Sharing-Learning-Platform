@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Form, Button, Alert, Row, Col, Card } from 'react-bootstrap';
+import { Container, Form, Button, Alert, Row, Col, Card, Image } from 'react-bootstrap';
 import { useParams, useNavigate } from 'react-router-dom';
 import eventService from '../services/eventService';
 
@@ -9,6 +9,9 @@ function EventWorkshopEdit() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [submitted, setSubmitted] = useState(false);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(null);
+  const [existingPhoto, setExistingPhoto] = useState(null);
   
   const [formData, setFormData] = useState({
     eventName: '',
@@ -30,6 +33,12 @@ function EventWorkshopEdit() {
           eventDate: eventData.eventDate || '',
           location: eventData.location || '',
         });
+        
+        // Set existing photo if available
+        if (eventData.photoUrl) {
+          setExistingPhoto(eventData.photoUrl);
+        }
+        
         setLoading(false);
       } catch (err) {
         setError('Failed to load event details. Please try again.');
@@ -46,6 +55,18 @@ function EventWorkshopEdit() {
       ...prevState,
       [name]: value
     }));
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setSelectedFile(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreviewUrl(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -68,8 +89,14 @@ function EventWorkshopEdit() {
         updatedAt: now
       };
       
-      // Call the API to update the event
-      await eventService.updateEvent(id, eventData);
+      let result;
+      if (selectedFile) {
+        // Call the API to update the event with a new photo
+        result = await eventService.updateEventWithPhoto(id, eventData, selectedFile);
+      } else {
+        // Call the API to update the event without changing the photo
+        result = await eventService.updateEvent(id, eventData);
+      }
       
       setSubmitted(true);
       setLoading(false);
@@ -180,6 +207,46 @@ function EventWorkshopEdit() {
                       </Form.Group>
                     </Col>
                   </Row>
+                  
+                  {existingPhoto && !previewUrl && (
+                    <div className="mb-3">
+                      <p className="mb-2">Current Photo:</p>
+                      <div style={{ maxWidth: '300px', maxHeight: '200px', overflow: 'hidden' }}>
+                        <Image 
+                          src={`http://localhost:8080/uploads/${existingPhoto}`} 
+                          alt="Current Event Photo" 
+                          thumbnail 
+                          style={{ width: '100%', objectFit: 'cover' }}
+                        />
+                      </div>
+                    </div>
+                  )}
+                  
+                  <Form.Group className="mb-4">
+                    <Form.Label>Update Photo</Form.Label>
+                    <Form.Control 
+                      type="file" 
+                      accept="image/*"
+                      onChange={handleFileChange}
+                    />
+                    <Form.Text className="text-muted">
+                      Upload a new image for your event (leave empty to keep current photo)
+                    </Form.Text>
+                  </Form.Group>
+                  
+                  {previewUrl && (
+                    <div className="mb-4">
+                      <p className="mb-2">Preview of new photo:</p>
+                      <div style={{ maxWidth: '300px', maxHeight: '200px', overflow: 'hidden' }}>
+                        <Image 
+                          src={previewUrl} 
+                          alt="Preview" 
+                          thumbnail 
+                          style={{ width: '100%', objectFit: 'cover' }}
+                        />
+                      </div>
+                    </div>
+                  )}
                   
                   <div className="d-flex justify-content-end mt-4">
                     <Button 
