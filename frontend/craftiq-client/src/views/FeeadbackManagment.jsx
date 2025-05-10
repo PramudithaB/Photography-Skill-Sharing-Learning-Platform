@@ -102,15 +102,26 @@ function FeedbackManagement() {
   const API_URL = "http://localhost:8080/api/feedback/";
 
   // Fetch from backend
+  // useEffect(() => {
+  //   fetch(API_URL)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setComments(data);
+  //     })
+  //     .catch((err) => {
+  //       console.error("Failed to fetch feedback:", err);
+  //     });
+  // }, []);
+
   useEffect(() => {
-    fetch(API_URL)
-      .then((res) => res.json())
-      .then((data) => {
-        setComments(data);
-      })
-      .catch((err) => {
-        console.error("Failed to fetch feedback:", err);
-      });
+    const fetchComments = async () => {
+      const res = await fetch(API_URL);
+      const data = await res.json();
+      console.log(data);
+      setComments(data); // Ensure each item has author, createdAt
+    };
+
+    fetchComments();
   }, []);
 
   const handleEditClick = (id, currentText) => {
@@ -124,12 +135,18 @@ function FeedbackManagement() {
 
   const handleSaveClick = async (id) => {
     const updatedComment = editedFeedback[id];
+    console.log("Update it : ", updatedComment);
+
+    const original = comments.find((m) => m.id == id);
+    const newComment = original
+      ? { ...original, comment: updatedComment }
+      : null;
 
     try {
-      const res = await fetch(`${API_URL}/${id}`, {
+      const res = await fetch(`${API_URL}${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ comment: updatedComment }),
+        body: JSON.stringify(newComment),
       });
 
       if (res.ok) {
@@ -151,7 +168,7 @@ function FeedbackManagement() {
 
   const handleDelete = async (id) => {
     try {
-      const res = await fetch(`${API_URL}/${id}`, {
+      const res = await fetch(`${API_URL}${id}`, {
         method: "DELETE",
       });
 
@@ -185,9 +202,9 @@ function FeedbackManagement() {
                     }}
                   />
                   <div>
-                    <strong>{comment.author}</strong>
+                    <strong>{comment.author || comment.author}</strong>
                     <br />
-                    <small>{comment.createdAt}</small>
+                    <small>{comment.createdAt || comment.createdAt}</small>
                   </div>
                 </div>
 
