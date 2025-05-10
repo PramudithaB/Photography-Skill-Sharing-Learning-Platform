@@ -57,6 +57,9 @@ function UserProfile() {
               <div className="card mt-3">
                 <Link to="/user/event-workshop" className="btn btn-primary">Event Workshop Managment</Link>
               </div>
+              <div className="card mt-3">
+                <Link to="/user/plane-create" className="btn btn-primary">Add Learning Plans</Link>
+              </div>
               
             </div>
             <div className="col-md-8">

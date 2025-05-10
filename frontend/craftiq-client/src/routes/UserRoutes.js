@@ -19,6 +19,7 @@ import EventWorkshop from '../views/EventWorkshop';
 import EventWorkshopCreate from '../views/EventWorkshopCreate';
 import EventWorkshopDetails from '../views/EventWorkshopDetails';
 import EventWorkshopEdit from '../views/EventWorkshopEdit';
+import LearningPlans from "../views/LearningPlans";
 
 const UserRoutes = [
   {
@@ -28,6 +29,7 @@ const UserRoutes = [
     layout: "/user",
     hidden: false,
   },
+ 
   {
     path: "/about",
     name: "About",
@@ -160,6 +162,12 @@ const UserRoutes = [
     component: EventWorkshopEdit, 
     layout: "/user",
     hidden: true,
+  },
+  {
+    path: "/learning-plans",
+    name: "Learning Plans",
+    component: LearningPlans,
+    layout: "/user"
   }
 ];
 

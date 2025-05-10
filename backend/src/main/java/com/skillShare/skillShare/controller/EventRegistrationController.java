@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
@@ -16,6 +18,25 @@ import java.util.List;
 public class EventRegistrationController {
 
     private final EventRegistrationServiceImpl eventRegistrationService;
+
+    // Test endpoint - GET
+    @GetMapping("/test")
+    public ResponseEntity<Map<String, String>> testGet() {
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "GET API is working!");
+        response.put("status", "success");
+        return ResponseEntity.ok(response);
+    }
+
+    // Test endpoint - POST
+    @PostMapping("/test")
+    public ResponseEntity<Map<String, Object>> testPost(@RequestBody Map<String, Object> payload) {
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "POST API is working!");
+        response.put("status", "success");
+        response.put("receivedData", payload);
+        return ResponseEntity.ok(response);
+    }
 
     // Create Event Registration
     @PostMapping("/create")
