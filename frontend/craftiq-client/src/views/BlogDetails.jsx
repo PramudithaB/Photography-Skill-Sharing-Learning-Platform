@@ -57,7 +57,8 @@ function BlogDetails() {
       try {
         const response = await fetch('http://localhost:8080/api/feedback/');
         const data = await response.json();
-        setComments(data); // Make sure backend returns an array
+        setComments(data);
+        console.log("comment :" , data) // Make sure backend returns an array
       } catch (error) {
         console.error('Failed to fetch comments:', error);
       }
@@ -67,7 +68,7 @@ function BlogDetails() {
   }, []);
 
   return (
-    <div>
+    <div> 
       {/*================Blog Area =================*/}
       <section className="blog_area single-post-area section-padding">
         <div className="container">
