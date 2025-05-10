@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Form, Button, Alert, Row, Col, Card } from 'react-bootstrap';
+import { Container, Form, Button, Alert, Row, Col, Card, Image } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import eventService from '../services/eventService';
 
@@ -8,6 +8,8 @@ function EventWorkshopCreate() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [submitted, setSubmitted] = useState(false);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(null);
   
   const [formData, setFormData] = useState({
     eventName: '',
@@ -23,6 +25,18 @@ function EventWorkshopCreate() {
       ...prevState,
       [name]: value
     }));
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setSelectedFile(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreviewUrl(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -46,8 +60,14 @@ function EventWorkshopCreate() {
         updatedAt: now
       };
       
-      // Call the API to create the event
-      await eventService.createEvent(eventData);
+      let result;
+      if (selectedFile) {
+        // Call the API to create the event with photo
+        result = await eventService.createEventWithPhoto(eventData, selectedFile);
+      } else {
+        // Call the API to create the event without photo
+        result = await eventService.createEvent(eventData);
+      }
       
       setSubmitted(true);
       setLoading(false);
@@ -152,6 +172,32 @@ function EventWorkshopCreate() {
                       </Form.Group>
                     </Col>
                   </Row>
+                  
+                  <Form.Group className="mb-4">
+                    <Form.Label>Event Photo</Form.Label>
+                    <Form.Control 
+                      type="file" 
+                      accept="image/*"
+                      onChange={handleFileChange}
+                    />
+                    <Form.Text className="text-muted">
+                      Upload an image for your event (optional)
+                    </Form.Text>
+                  </Form.Group>
+                  
+                  {previewUrl && (
+                    <div className="mb-4">
+                      <p className="mb-2">Preview:</p>
+                      <div style={{ maxWidth: '300px', maxHeight: '200px', overflow: 'hidden' }}>
+                        <Image 
+                          src={previewUrl} 
+                          alt="Preview" 
+                          thumbnail 
+                          style={{ width: '100%', objectFit: 'cover' }}
+                        />
+                      </div>
+                    </div>
+                  )}
                   
                   <div className="d-flex justify-content-end mt-4">
                     <Button 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Button, Container, Row, Col, Alert } from 'react-bootstrap';
+import { Card, Button, Container, Row, Col, Alert, Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import eventService from '../services/eventService';
 
@@ -55,9 +55,24 @@ function EventWorkshopAll() {
         <Row>
           {events.map(event => (
             <Col md={6} lg={4} className="mb-4" key={event.id}>
-              <Card className="h-100 shadow-sm">
+              <Card className="h-100 shadow-sm" style={{
+                borderRadius: '12px',
+                transition: 'transform 0.3s ease',
+                overflow: 'hidden'
+              }}
+              onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-5px)'}
+              onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}>
+                {event.photoUrl && (
+                  <div style={{ height: '180px', overflow: 'hidden' }}>
+                    <Image 
+                      src={`http://localhost:8080/uploads/${event.photoUrl}`}
+                      alt={event.eventName}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    />
+                  </div>
+                )}
                 <Card.Body>
-                  <Card.Title>{event.eventName}</Card.Title>
+                  <Card.Title className="fw-bold mb-3">{event.eventName}</Card.Title>
                   <Card.Text as="div">
                     <div className="mb-2">
                       <strong>Organizer:</strong> {event.organizer}
@@ -68,13 +83,20 @@ function EventWorkshopAll() {
                     <div className="mb-2">
                       <strong>Location:</strong> {event.location}
                     </div>
-                    <div className="text-truncate mt-3">
+                    <div className="mt-3 text-truncate">
                       {event.description}
                     </div>
                   </Card.Text>
                 </Card.Body>
                 <Card.Footer className="bg-white">
-                 
+                  {/* <Button 
+                    variant="outline-primary" 
+                    as={Link} 
+                    to={`/events/${event.id}`}
+                    className="w-100"
+                  >
+                    View Details
+                  </Button> */}
                 </Card.Footer>
               </Card>
             </Col>

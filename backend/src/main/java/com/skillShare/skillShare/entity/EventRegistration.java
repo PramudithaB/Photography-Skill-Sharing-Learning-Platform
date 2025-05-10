@@ -30,4 +30,6 @@ public class EventRegistration {
     private String eventDate;
     
     private String location;
+    
+    private String photoUrl;
 }
