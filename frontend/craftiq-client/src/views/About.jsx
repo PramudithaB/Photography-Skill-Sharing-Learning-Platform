@@ -7,7 +7,7 @@ import team3 from "../assets/clients/img/gallery/team3.png"
 import about from "../assets/clients/img/gallery/about.png"
 function About() {
   return (
-    <div>
+    <div> deshan
       <div className="about-details section-padding30">
         <div className="container">
           <div className="row">
