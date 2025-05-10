@@ -15,6 +15,7 @@ public class EventRegistrationDto {
     private String organizer;
     private String eventDate;
     private String location;
+    private String photoUrl;
 
     public EventRegistration toEntity(ModelMapper mapper) {
         return mapper.map(this, EventRegistration.class);
